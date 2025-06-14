@@ -11,6 +11,7 @@ import Login from './components/LoginPage/Login';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
+import AiModal from './modals/AiModal';
 
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -32,15 +33,22 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 function App({ toggleMode, mode }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false)
+  const handleModal = () => {
+    setOpenModal(!openModal)
+  }
+  const handleClose = () => {  // Function to handle closing the modal
+    setOpenModal(false);
+  }
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const isHome = location.pathname === '/' || location.pathname === '/home';
   const isLoginPage = location.pathname === '/login' || location.pathname === '/register';
 
- useEffect(() => {
-  const loggedInFlag = localStorage.getItem('isLoggedIn') === 'true';
-  setIsLoggedIn(loggedInFlag);
-}, [location]); 
+  useEffect(() => {
+    const loggedInFlag = localStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(loggedInFlag);
+  }, [location]);
 
 
 
@@ -169,6 +177,13 @@ function App({ toggleMode, mode }) {
           }
         </Suspense>
       </Box>
+      <Box sx={{ position: "fixed", right: '10px', bottom: '10px' }}>
+        <Box onClick={handleModal} sx={{ cursor: 'pointer', position: 'relative', width: '40px', height: '40px', borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'red', color: 'imgBtn.primary' }}>
+          Ai
+        </Box>
+      </Box>
+
+      {openModal ? <AiModal open={openModal} onClose={handleClose} /> : ""}
     </RouteChangeHandler>
   );
 }

@@ -55,17 +55,16 @@ export default function Sidebar({ open, onClose, navitem }) {
 
             >
                 {navitem.map((text, index) => (
-                    <ListItem key={index} disablePadding>
-                        <ListItemButton >
-                            <Link to={text.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: "text.primary" }}>
+                    <Link to={text.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: "text.primary" }}>
+                        <ListItem key={index} disablePadding>
+                            <ListItemButton >
                                 <ListItemIcon>
                                     {text.icon && <text.icon />}
-
                                 </ListItemIcon>
                                 <ListItemText primary={text.lable} sx={{ color: 'text.primary' }} />
-                            </Link>
-                        </ListItemButton>
-                    </ListItem>
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                 ))}
             </List>
             <List
@@ -74,17 +73,17 @@ export default function Sidebar({ open, onClose, navitem }) {
                 sx={{ m: 0, p: 0 }}
             >
                 {sidebaritem.map((ele, index) => (
-                    <ListItem key={index} disablePadding>
-                        <ListItemButton >
-                            <Link to={ele.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: "text.primary" }}>
+                    <Link to={ele.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: "text.primary" }}>
+                        <ListItem key={index} disablePadding>
+                            <ListItemButton >
                                 <ListItemIcon>
                                     {ele.icon && <ele.icon />}
 
                                 </ListItemIcon>
                                 <ListItemText primary={ele.lable} sx={{ color: 'text.primary' }} />
-                            </Link>
-                        </ListItemButton>
-                    </ListItem>
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                 ))}
             </List>
             <Box sx={{ mt: 'auto', p: 2, display: 'flex', justifyContent: 'center' }}>
@@ -94,6 +93,7 @@ export default function Sidebar({ open, onClose, navitem }) {
                     onClick={() => {
                         localStorage.removeItem("user");
                         window.location.replace("/login");
+                        setIsLoggedIn(false);
                         toast.info("You have been logged out.");
                     }}
                     variant="contained"

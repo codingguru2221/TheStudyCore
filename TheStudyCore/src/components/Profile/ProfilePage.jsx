@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import {
   Avatar,
   Box,
@@ -12,6 +12,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 
 const ProfilePage = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <Box
       sx={{
@@ -62,9 +63,9 @@ const ProfilePage = () => {
             />
             <Box>
               <Typography variant="h6" fontWeight="bold" color="text.primary">
-                Sophia Carter
+                {user ? user.userName : "Guest"}
               </Typography>
-              <Typography color="text.secondary">@sophia.carter</Typography>
+              <Typography color="text.secondary">{user ? user.email : '@sophia.carter'}</Typography>
               <Typography sx={{ color: 'primary.main' }}>B.Tech CSE</Typography>
             </Box>
           </Box>

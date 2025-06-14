@@ -20,13 +20,7 @@ const HomePage = () => {
             <FamousTopic />
 
 
-            <Box sx={{ position: "fixed", right: '10px', bottom: '10px' }}>
-                <Box onClick={handleModal} sx={{ cursor: 'pointer', position: 'relative', width: '40px', height: '40px', borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'red', color: 'imgBtn.primary' }}>
-                    Ai
-                </Box>
-            </Box>
-
-            {openModal ? <AiModal open={openModal} onClose={handleClose} /> : ""}
+            
         </Box>
     )
 }

@@ -22,7 +22,7 @@ const HomeFirstSection = () => {
 
                 <Box sx={{ display: 'flex',flexWrap:'wrap', mt: {md:3,xs:1}, justifyContent: 'center', alignItems: 'center', gap: {md:5,xs:3},pb:{xs:4,md:0,sm:2} }}>
                     <Button variant="contained" sx={{ color: 'cardBtnColor.default', bgcolor: 'cardBtn2.primary', height: '3rem', borderRadius: '10px', width: '10rem', fontWeight: 600, textTransform: 'none' }}>Ask a Question</Button>
-                    <Button variant="contained" sx={{ color: 'background.paper', bgcolor: 'cardBtn.primary', height: '3rem', borderRadius: '10px', width: '10rem', fontWeight: 600, textTransform: 'none' }}>Ecplore Subjects</Button>
+                    <Button variant="contained" sx={{ color: 'background.paper', bgcolor: 'cardBtn.primary', height: '3rem', borderRadius: '10px', width: '10rem', fontWeight: 600, textTransform: 'none' }}>Explore Subjects</Button>
                 </Box>
 
             </Box>

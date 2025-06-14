@@ -20,7 +20,7 @@ const GoToHomeButton = () => {
     if (!isLoginOrRegisterPage) return null;
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', m: 2 }}>
             <Button
                 variant="contained"
                 color="primary"

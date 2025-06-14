@@ -7,43 +7,41 @@ import {
   Divider,
 } from "@mui/material";
 import TeamMemberCard from "../components/AboutPage/TeamMemberCard";
+import ladduImg from '../assets/ladduImg1.png'
+import kailasImg from '../assets/kailash.png'
+import preetImg from '../assets/preet.png'
+import codexImg from '../assets/codex.png'
 
 const team = [
   {
-    name: "PZX",
+    name: "Veerendra Vishwakarma ",
+    role: "Full Stack Developer",
+    image: codexImg,
+    description: "Builds both the frontend and backend of applications, ensuring smooth integration and top-notch performance."
+
+  },
+  {
+    name: "Kajal Manjhi",
+    role: "Backend Developer",
+    image: ladduImg,
+    description: "Expert in server-side logic, APIs, and database management, ensuring data flows efficiently and securely."
+
+  },
+  {
+    name: "Kailas Hariprasad",
     role: "Frontend Developer",
-    image: "https://i.pravatar.cc/150?img=1",
-    description: "Loves React, UI design, and creative web experiences."
+    image: kailasImg,
+    description: "Specializes in crafting responsive and interactive user interfaces using modern frameworks like React."
 
   },
   {
-    name: "ZyZ",
+    name: "Preet Nagar",
     role: "UI/UX Designer",
-    image: "https://i.pravatar.cc/150?img=2",
-    description: "Loves React, UI design, and creative web experiences."
+    image: preetImg,
+    description: "Designs intuitive user experiences and beautiful interfaces focused on usability, consistency, and visual appeal."
 
   },
-  {
-    name: "XYZ",
-    role: "React Developer",
-    image: "https://i.pravatar.cc/150?img=3",
-    description: "Loves React, UI design, and creative web experiences."
 
-  },
-  {
-    name: "ZyZ",
-    role: "UI/UX Designer",
-    image: "https://i.pravatar.cc/150?img=2",
-    description: "Loves React, UI design, and creative web experiences."
-
-  },
-  {
-    name: "XYZ",
-    role: "React Developer",
-    image: "https://i.pravatar.cc/150?img=3",
-    description: "Loves React, UI design, and creative web experiences."
-
-  },
 ];
 
 const About = () => {
@@ -82,7 +80,7 @@ const About = () => {
                 name={member.name}
                 role={member.role}
                 image={member.image}
-                description={ member.description}
+                description={member.description}
 
               />
             </Grid>

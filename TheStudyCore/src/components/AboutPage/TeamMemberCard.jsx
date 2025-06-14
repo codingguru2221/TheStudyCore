@@ -19,10 +19,11 @@ const TeamMemberCard = ({ name, role, image, description }) => {
         boxShadow: 6,
         transition: "0.3s",
         p: 2,
-        "&:hover": {
-          boxShadow: 10,
-          background: "linear-gradient(135deg, #f0f4ff 0%, #e6ecff 100%)",
+        '&:hover': {
+          transform: 'translateY(-8px)',
+          boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.15)',
         },
+       
       }}
     >
       <Stack spacing={2} alignItems="center">

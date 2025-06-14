@@ -1,0 +1,2 @@
+# TheStudyCore
+a hackthon project

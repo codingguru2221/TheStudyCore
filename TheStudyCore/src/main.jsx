@@ -1,10 +1,36 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React, { useMemo, useState } from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { getDesignTokens } from './theme.js';
+import { createTheme } from '@mui/material/styles';
+import { BrowserRouter } from 'react-router';
+import ScrollToTop from './ScrollToTop.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const Main = () => {
+  const [mode, setMode] = useState('light');
+
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div
+        style={{
+          '--primary-color': theme.palette.primary.main,
+          '--secondary-color': theme.palette.secondary.main,
+        }}
+      >
+        <App toggleMode={() => setMode((prev) => (prev === 'light' ? 'dark' : 'light'))} mode={mode} />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <ScrollToTop />
+    <Main />
+  </BrowserRouter>
+
+);

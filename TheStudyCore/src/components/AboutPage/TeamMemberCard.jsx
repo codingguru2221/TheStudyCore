@@ -29,6 +29,7 @@ const TeamMemberCard = ({ name, role, image, description }) => {
         <Avatar
           alt={name}
           src={image}
+          loading="lazy"
           sx={{ width: 90, height: 90, border: "3px solid #fff", boxShadow: 3 }}
         />
         <Box textAlign="center">

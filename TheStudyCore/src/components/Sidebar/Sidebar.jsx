@@ -10,7 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { Typography } from '@mui/material';
@@ -24,6 +24,8 @@ import PersonIcon from '@mui/icons-material/Person';
 
 
 export default function Sidebar({ open, onClose, navitem }) {
+    const navigate = useNavigate();
+
     const sidebaritem = [{ lable: 'Dashboard', path: '/dashboard', icon: DashboardIcon },
     { lable: "Notes & Material", path: '/notes', icon: NotesIcon },
     // { lable: "Material", path: 'material' },
@@ -86,9 +88,29 @@ export default function Sidebar({ open, onClose, navitem }) {
                 ))}
             </List>
             <Box sx={{ mt: 'auto', p: 2, display: 'flex', justifyContent: 'center' }}>
-                <Button variant="contained" sx={{ color: 'background.paper', bgcolor: 'background', height: '3rem', borderRadius: '10px', width: '10rem', fontWeight: 600, textTransform: 'none' }}>
-                    Log Out
+
+
+                <Button
+                    onClick={() => {
+                        localStorage.removeItem("user");
+                        window.location.replace("/login");
+                        toast.info("You have been logged out.");
+                    }}
+                    variant="contained"
+                    sx={{
+                        color: 'background.paper',
+                        bgcolor: 'background',
+                        height: '3rem',
+                        borderRadius: '10px',
+                        width: '10rem',
+                        fontWeight: 600,
+                        textTransform: 'none'
+                    }}
+                >
+                    Logout
                 </Button>
+
+
 
                 {/* <Typography sx={{ cursor: 'pointer' }}></Typography> */}
             </Box>

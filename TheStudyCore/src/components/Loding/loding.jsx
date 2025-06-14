@@ -3,7 +3,13 @@ import styled from 'styled-components';
 
 const Loader = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper style={{
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 9999,
+    }}>
       <svg xmlns="http://www.w3.org/2000/svg" height="200px" width="200px" viewBox="0 0 200 200" className="pencil">
         <defs>
           <clipPath id="pencil-eraser">

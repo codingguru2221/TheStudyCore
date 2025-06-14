@@ -49,9 +49,6 @@ export default function MenuAppBar({ toggleMode, mode, isHome }) {
     { lable: "Home", path: '/home', icon: HomeIcon },
     { lable: "About", path: "/about", icon: InfoIcon },
     { lable: "Courses", path: "/course", icon: LibraryBooksIcon },
-    // { lable: "Notes", path: "/notes", icon: LibraryBooksIcon },
-    // { lable: "Resources", path: "/resources", icon: LibraryBooksIcon },
-    // { lable: "Ark Doubtit", path: "/arkDoubtit", icon: LibraryBooksIcon },
   ]
   return (
     <Box sx={{ flexGrow: { md: 1, xs: 0, sm: 1 }, mb: { md: 5, xs: 10 } }}>
@@ -117,9 +114,11 @@ export default function MenuAppBar({ toggleMode, mode, isHome }) {
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                sx={{ mt: 5, }}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <Link to={"/profile"} style={{ textDecoration: "none", color: 'navbarColor.primary' }}>
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                </Link>
               </Menu>
             </div>
           )}

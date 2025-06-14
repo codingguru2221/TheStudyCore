@@ -6,6 +6,7 @@ import { getDesignTokens } from './theme.js';
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router';
 import ScrollToTop from './ScrollToTop.jsx';
+import { ToastContainer } from 'react-toastify';
 
 const Main = () => {
   const [mode, setMode] = useState('light');
@@ -21,7 +22,10 @@ const Main = () => {
           '--secondary-color': theme.palette.secondary.main,
         }}
       >
+
         <App toggleMode={() => setMode((prev) => (prev === 'light' ? 'dark' : 'light'))} mode={mode} />
+        <ToastContainer />
+
       </div>
     </ThemeProvider>
   );

@@ -159,13 +159,13 @@ const ProfilePage = () => {
         </Box>
 
         {/* Settings */}
-        <Typography variant="h6" fontWeight="bold" color="text.primary" mb={1}>
+        {/* <Typography variant="h6" fontWeight="bold" color="text.primary" mb={1}>
           Settings
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography color="text.secondary">Dark Mode</Typography>
           <Switch sx={{ ml: 2 }} />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

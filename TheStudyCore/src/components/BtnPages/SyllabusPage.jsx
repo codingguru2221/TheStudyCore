@@ -3,66 +3,90 @@ import {
   Container,
   Typography,
   Paper,
-  MenuItem,
   TextField,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Divider,
-  Box,
-  Checkbox,
-  FormControlLabel,
   Button,
-  LinearProgress,
+  CircularProgress,
+  Snackbar,
+  Alert,
+  MenuItem,
+  Box,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DownloadIcon from '@mui/icons-material/Download';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import ReactMarkdown from 'react-markdown';
 
-const syllabusData = {
-  "Operating System": [
-    { unit: "Unit 1", content: "Introduction to OS, Types, Functions, System Calls, Structure of OS." },
-    { unit: "Unit 2", content: "Process Management, PCB, Scheduling Algorithms, Threading, Interprocess Communication." },
-    { unit: "Unit 3", content: "Deadlock, Conditions, Prevention, Avoidance (Banker's Algorithm), Recovery." },
-    { unit: "Unit 4", content: "Memory Management, Paging, Segmentation, Virtual Memory, Page Replacement." },
-    { unit: "Unit 5", content: "File System, Directory Structure, Allocation Methods, Disk Scheduling." }
-  ],
-  "DAA": [
-    { unit: "Unit 1", content: "Algorithm Analysis, Asymptotic Notation, Recurrences, Master's Theorem." },
-    { unit: "Unit 2", content: "Divide and Conquer, Merge Sort, Quick Sort, Binary Search." },
-    { unit: "Unit 3", content: "Greedy Algorithms, Activity Selection, Huffman Coding, MST - Kruskal, Prim." },
-    { unit: "Unit 4", content: "Dynamic Programming, Matrix Chain, LCS, 0/1 Knapsack." },
-    { unit: "Unit 5", content: "Backtracking, Branch and Bound, NP-Completeness, Graph Coloring." }
-  ],
-  "Software Engineering": [
-    { unit: "Unit 1", content: "Software Characteristics, SDLC Models, Agile, Scrum." },
-    { unit: "Unit 2", content: "Requirement Engineering, SRS, Use Cases." },
-    { unit: "Unit 3", content: "Design Concepts, UML, Architecture Design." },
-    { unit: "Unit 4", content: "Testing: Unit, Integration, System, White-Box, Black-Box." },
-    { unit: "Unit 5", content: "Software Maintenance, Project Management, Risk Analysis." }
-  ]
-};
+const educationLevels = [
+  { value: 'school', label: 'School' },
+  { value: 'college', label: 'College' },
+  { value: 'btech', label: 'B.Tech' },
+  { value: 'mtech', label: 'M.Tech' },
+  { value: 'phd', label: 'PhD' }
+];
 
 const SyllabusPage = () => {
-  const [selectedSubject, setSelectedSubject] = useState("Operating System");
-  const [searchText, setSearchText] = useState("");
-  const [completedUnits, setCompletedUnits] = useState({});
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [educationLevel, setEducationLevel] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [generatedSyllabusContent, setGeneratedSyllabusContent] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
-  const subjectUnits = syllabusData[selectedSubject];
-
-  const handleCheckboxChange = (unit) => {
-    setCompletedUnits((prev) => ({
-      ...prev,
-      [unit]: !prev[unit],
-    }));
+  const handleSubjectChange = (e) => {
+    setSelectedSubject(e.target.value);
   };
 
-  const filteredUnits = subjectUnits.filter((unit) =>
-    unit.content.toLowerCase().includes(searchText.toLowerCase())
-  );
+  const handleEducationLevelChange = (e) => {
+    setEducationLevel(e.target.value);
+  };
 
-  const completedCount = Object.values(completedUnits).filter(Boolean).length;
-  const totalCount = subjectUnits.length;
-  const progress = Math.round((completedCount / totalCount) * 100);
+  const generateSyllabus = async () => {
+    if (!selectedSubject || !educationLevel) {
+      setSnackbar({
+        open: true,
+        message: 'Please enter both subject name and education level',
+        severity: 'error'
+      });
+      return;
+    }
+
+    setLoading(true);
+    setGeneratedSyllabusContent(null); // Clear previous content
+    try {
+      const res = await fetch('http://localhost:8000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Generate a complete syllabus for ${selectedSubject} at ${educationLevel} level`,
+          pageType: 'syllabus',
+          additionalData: {
+            subject: selectedSubject,
+            educationLevel: educationLevel
+          }
+        }),
+      });
+
+      const data = await res.json();
+      console.log('AI Response Data:', data);
+      setGeneratedSyllabusContent(data.response); // Set the entire response
+      console.log('Generated Syllabus Content after set:', data.response);
+
+      setSnackbar({
+        open: true,
+        message: 'Syllabus generated successfully!',
+        severity: 'success'
+      });
+    } catch (err) {
+      console.error('Error generating syllabus:', err);
+      setSnackbar({
+        open: true,
+        message: 'Failed to generate syllabus. Please try again.',
+        severity: 'error'
+      });
+    }
+    setLoading(false);
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar(prev => ({ ...prev, open: false }));
+  };
 
   return (
     <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
@@ -71,72 +95,113 @@ const SyllabusPage = () => {
           📚 Subject-wise Syllabus
         </Typography>
 
-        <TextField
-          select
-          label="Select Subject"
-          value={selectedSubject}
-          onChange={(e) => {
-            setSelectedSubject(e.target.value);
-            setCompletedUnits({}); // reset progress
-            setSearchText("");
-          }}
-          fullWidth
-          sx={{ mb: 3 }}
-        >
-          {Object.keys(syllabusData).map((subject) => (
-            <MenuItem key={subject} value={subject}>
-              {subject}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
-          label="Search topic..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          fullWidth
-          sx={{ mb: 3 }}
-        />
-
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="body1">
-            ✅ Completed: {completedCount}/{totalCount}
-          </Typography>
-          <LinearProgress variant="determinate" value={progress} sx={{ height: 10, borderRadius: 5 }} />
+        <Box sx={{ mb: 3 }}>
+          <TextField
+            label="Enter Subject Name"
+            value={selectedSubject}
+            onChange={handleSubjectChange}
+            fullWidth
+            placeholder="e.g., Operating Systems, Data Structures, etc."
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            select
+            label="Education Level"
+            value={educationLevel}
+            onChange={handleEducationLevelChange}
+            fullWidth
+            sx={{ mb: 2 }}
+          >
+            {educationLevels.map((level) => (
+              <MenuItem key={level.value} value={level.value}>
+                {level.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </Box>
 
-        <Divider sx={{ mb: 3 }} />
-
-        {filteredUnits.map((unit, idx) => (
-          <Accordion key={idx} defaultExpanded={idx === 0}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={!!completedUnits[unit.unit]}
-                    onChange={() => handleCheckboxChange(unit.unit)}
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                }
-                label={<Typography variant="h6">{unit.unit}</Typography>}
-              />
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">{unit.content}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-
-        <Box textAlign="right" sx={{ mt: 4 }}>
+        <Box sx={{ mb: 3 }}>
           <Button
             variant="contained"
-            endIcon={<DownloadIcon />}
-            onClick={() => alert("PDF Export coming soon!")}
+            onClick={generateSyllabus}
+            disabled={loading || !selectedSubject || !educationLevel}
+            startIcon={loading ? <CircularProgress size={20} /> : <AutoStoriesIcon />}
+            fullWidth
           >
-            Export to PDF
+            Generate Syllabus
           </Button>
         </Box>
+
+        <Box sx={{ 
+          mt: 4, 
+          p: 3, 
+          bgcolor: 'background.paper', 
+          borderRadius: 2,
+          border: '1px solid', 
+          borderColor: 'grey.300',
+          minHeight: '200px', // Ensure the box is visible even when empty
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: generatedSyllabusContent ? 'flex-start' : 'center',
+          alignItems: generatedSyllabusContent ? 'flex-start' : 'center',
+          overflow: 'auto',
+          '& h1, & h2, & h3, & h4, & h5, & h6': {
+            mt: 2,
+            mb: 1,
+            color: 'primary.main'
+          },
+          '& p': {
+            mb: 1.5,
+          },
+          '& ul, & ol': {
+            pl: 3,
+            mb: 1.5,
+          },
+          '& li': {
+            mb: 0.5,
+          },
+          '& code': {
+            bgcolor: 'action.hover',
+            p: 0.5,
+            borderRadius: 1,
+          },
+          '& pre': {
+            bgcolor: 'action.hover',
+            p: 2,
+            borderRadius: 1,
+            overflowX: 'auto',
+          }
+        }}>
+          {loading ? (
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+              <CircularProgress />
+              <Typography variant="h6" color="text.secondary">Generating Syllabus...</Typography>
+            </Box>
+          ) : generatedSyllabusContent ? (
+            <>
+              <Typography variant="h5" gutterBottom color="secondary">
+                Generated Syllabus for {selectedSubject}
+              </Typography>
+              <ReactMarkdown>{generatedSyllabusContent}</ReactMarkdown>
+            </>
+          ) : (
+            <Typography variant="h6" color="text.secondary">
+              No syllabus generated yet.
+            </Typography>
+          )}
+        </Box>
       </Paper>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

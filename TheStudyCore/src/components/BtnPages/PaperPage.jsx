@@ -10,6 +10,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
+import ReactMarkdown from 'react-markdown';
 
 const subjects = [
   'Mathematics-III',
@@ -43,7 +44,6 @@ const PaperPage = () => {
   };
 
   const handleSubmit = async () => {
-    
     const { subject, difficulty, marks, type } = formData;
 
     if (!formData.name || !marks) {
@@ -51,14 +51,21 @@ const PaperPage = () => {
       return;
     }
 
-    const prompt = `Generate a ${difficulty} level ${type} question paper of ${subject} for ${marks} marks.`;
-
     setLoading(true);
     try {
       const res = await fetch('http://localhost:8000/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: prompt }),
+        body: JSON.stringify({
+          message: `Generate a ${difficulty} level ${type} question paper for ${subject}`,
+          pageType: 'paper',
+          additionalData: {
+            subject,
+            difficulty,
+            marks,
+            type
+          }
+        }),
       });
 
       const data = await res.json();
@@ -75,7 +82,7 @@ const PaperPage = () => {
         {/* Paper Title */}
         <Box sx={{ mb: 2 }}>
           <Typography variant="h4" gutterBottom>
-            📝 Semester Paper Generator
+            📝 Question Paper Generator
           </Typography>
         </Box>
 
@@ -162,9 +169,39 @@ const PaperPage = () => {
               📄 Generated Paper Preview
             </Typography>
 
-            <Typography variant="body1" sx={{ whiteSpace: 'pre-line', mt: 2 }}>
-              {aiResponse}
-            </Typography>
+            <Box sx={{ 
+              mt: 2, 
+              p: 2, 
+              bgcolor: 'background.default', 
+              borderRadius: 2,
+              '& h1, & h2, & h3, & h4, & h5, & h6': {
+                mt: 2,
+                mb: 1,
+              },
+              '& p': {
+                mb: 1,
+              },
+              '& ul, & ol': {
+                pl: 3,
+                mb: 1,
+              },
+              '& li': {
+                mb: 0.5,
+              },
+              '& code': {
+                bgcolor: 'action.hover',
+                p: 0.5,
+                borderRadius: 1,
+              },
+              '& pre': {
+                bgcolor: 'action.hover',
+                p: 2,
+                borderRadius: 1,
+                overflowX: 'auto',
+              }
+            }}>
+              <ReactMarkdown>{aiResponse}</ReactMarkdown>
+            </Box>
           </>
         )}
       </Paper>

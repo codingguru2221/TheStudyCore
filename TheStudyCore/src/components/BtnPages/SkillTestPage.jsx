@@ -5,68 +5,71 @@ import {
   Paper,
   Typography,
   TextField,
-  MenuItem,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   Button,
-  Divider,
+  CircularProgress,
+  Snackbar,
   Alert,
 } from '@mui/material';
-
-const questionsData = {
-  "Operating System": [
-    {
-      question: "Which of the following is not an operating system?",
-      options: ["Windows", "Linux", "Oracle", "DOS"],
-      correct: "Oracle"
-    },
-    {
-      question: "Which of the following is a type of OS?",
-      options: ["Batch", "Time-sharing", "Real-time", "All of the above"],
-      correct: "All of the above"
-    }
-  ],
-  "DAA": [
-    {
-      question: "What is the time complexity of Merge Sort?",
-      options: ["O(n)", "O(n^2)", "O(n log n)", "O(log n)"],
-      correct: "O(n log n)"
-    },
-    {
-      question: "Which algorithm paradigm does Binary Search follow?",
-      options: ["Greedy", "Dynamic Programming", "Backtracking", "Divide and Conquer"],
-      correct: "Divide and Conquer"
-    }
-  ]
-};
+import ReactMarkdown from 'react-markdown';
 
 const SkillTestPage = () => {
-  const [subject, setSubject] = useState("Operating System");
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const questions = questionsData[subject];
+  const [subject, setSubject] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [aiQuestion, setAiQuestion] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
-  const handleOptionChange = (questionIdx, value) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionIdx]: value
-    }));
+  const handleSubjectChange = (e) => {
+    setSubject(e.target.value);
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const generateAIQuestion = async () => {
+    if (!subject) {
+      setSnackbar({
+        open: true,
+        message: 'Please enter a subject name first',
+        severity: 'error'
+      });
+      return;
+    }
+
+    setLoading(true);
+    setAiQuestion(null); // Clear previous question
+    try {
+      const res = await fetch('http://localhost:8000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Generate a challenging skill test question for ${subject}, including options (A, B, C, D) and a concise explanation of the correct answer.`,
+          pageType: 'skill_test',
+          additionalData: {
+            subject: subject,
+            topic: subject // Can be refined if specific topic input is added later
+          }
+        }),
+      });
+
+      const data = await res.json();
+      setAiQuestion(data.response);
+
+      setSnackbar({
+        open: true,
+        message: 'AI question generated successfully!',
+        severity: 'success'
+      });
+    } catch (err) {
+      console.error('Error generating AI question:', err);
+      setSnackbar({
+        open: true,
+        message: 'Failed to generate question. Please try again.',
+        severity: 'error'
+      });
+    }
+    setLoading(false);
   };
 
-  const getScore = () => {
-    let score = 0;
-    questions.forEach((q, idx) => {
-      if (answers[idx] === q.correct) score++;
-    });
-    return score;
+  const handleCloseSnackbar = () => {
+    setSnackbar(prev => ({ ...prev, open: false }));
   };
-
-  const score = getScore();
 
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
@@ -76,73 +79,86 @@ const SkillTestPage = () => {
         </Typography>
 
         <TextField
-          select
-          label="Select Subject"
+          label="Enter Subject Name"
           value={subject}
-          onChange={(e) => {
-            setSubject(e.target.value);
-            setAnswers({});
-            setSubmitted(false);
-          }}
+          onChange={handleSubjectChange}
           fullWidth
+          placeholder="e.g., Operating System, DAA, etc."
           sx={{ mb: 3 }}
-        >
-          {Object.keys(questionsData).map((subj) => (
-            <MenuItem key={subj} value={subj}>
-              {subj}
-            </MenuItem>
-          ))}
-        </TextField>
+        />
 
-        <Divider sx={{ mb: 3 }} />
-
-        {questions.map((q, idx) => (
-          <Box key={idx} sx={{ mb: 4 }}>
-            <Typography variant="h6">
-              Q{idx + 1}. {q.question}
-            </Typography>
-            <RadioGroup
-              value={answers[idx] || ""}
-              onChange={(e) => handleOptionChange(idx, e.target.value)}
-            >
-              {q.options.map((opt, i) => (
-                <FormControlLabel
-                  key={i}
-                  value={opt}
-                  control={<Radio />}
-                  label={opt}
-                />
-              ))}
-            </RadioGroup>
-
-            {submitted && (
-              <Alert severity={answers[idx] === q.correct ? "success" : "error"} sx={{ mt: 1 }}>
-                {answers[idx] === q.correct
-                  ? "✅ Correct"
-                  : `❌ Incorrect. Correct Answer: ${q.correct}`}
-              </Alert>
-            )}
-          </Box>
-        ))}
-
-        <Box textAlign="center">
+        <Box sx={{ mb: 3 }}>
           <Button
             variant="contained"
-            onClick={handleSubmit}
-            disabled={submitted}
+            onClick={generateAIQuestion}
+            disabled={loading || !subject}
+            startIcon={loading ? <CircularProgress size={24} /> : null}
+            fullWidth
           >
-            Submit Answers
+            {loading ? 'Generating Question...' : 'Generate AI Question'}
           </Button>
         </Box>
 
-        {submitted && (
+        {aiQuestion && (
+          <Box sx={{ 
+            mb: 4, 
+            p: 3, 
+            bgcolor: 'background.paper', 
+            borderRadius: 2,
+            border: '1px solid', 
+            borderColor: 'grey.300',
+            '& h1, & h2, & h3, & h4, & h5, & h6': {
+              mt: 2,
+              mb: 1,
+            },
+            '& p': {
+              mb: 1,
+            },
+            '& ul, & ol': {
+              pl: 3,
+              mb: 1,
+            },
+            '& li': {
+              mb: 0.5,
+            },
+            '& code': {
+              bgcolor: 'action.hover',
+              p: 0.5,
+              borderRadius: 1,
+            },
+            '& pre': {
+              bgcolor: 'action.hover',
+              p: 2,
+              borderRadius: 1,
+              overflowX: 'auto',
+            }
+          }}>
+            <Typography variant="h6" color="primary" gutterBottom>
+              AI-Generated Question
+            </Typography>
+            <ReactMarkdown>{aiQuestion}</ReactMarkdown>
+          </Box>
+        )}
+
+        {!loading && !aiQuestion && (
           <Box sx={{ mt: 4, textAlign: "center" }}>
-            <Typography variant="h5">
-              🎯 Your Score: {score} / {questions.length}
+            <Typography variant="h6" color="text.secondary">
+              Enter a subject and click 'Generate AI Question' to get started.
             </Typography>
           </Box>
         )}
       </Paper>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

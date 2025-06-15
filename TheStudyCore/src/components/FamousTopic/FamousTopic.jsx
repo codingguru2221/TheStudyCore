@@ -10,6 +10,7 @@ import FunctionsIcon from '@mui/icons-material/Functions';
 import ScienceIcon from '@mui/icons-material/Science';
 import WebIcon from '@mui/icons-material/Web';
 import { useTheme } from '@mui/material';
+import { Link } from 'react-router';
 
 const topics = [
     { name: 'C++', icon: <CodeIcon color="primary" fontSize="large" /> },
@@ -19,7 +20,7 @@ const topics = [
 ];
 
 const FamousTopic = () => {
-      const theme = useTheme(); // ✅ access custom theme
+    const theme = useTheme(); // ✅ access custom theme
 
     return (
         <Box sx={{ px: { xs: 2, sm: 4, md: 10 }, py: 8 }}>
@@ -75,23 +76,26 @@ const FamousTopic = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    color: 'background.paper',
-                                    bgcolor: 'cardBtn.primary',
-                                    height: '2.5rem',
-                                    borderRadius: '10px',
-                                    width: '7rem',
-                                    fontWeight: 600,
-                                    textTransform: 'none',
-                                    '&:hover': {
+                            <Link to={'/course'}>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        color: 'background.paper',
                                         bgcolor: 'cardBtn.primary',
-                                    },
-                                }}
-                            >
-                                Explore
-                            </Button>
+                                        height: '2.5rem',
+                                        borderRadius: '10px',
+                                        width: '7rem',
+                                        fontWeight: 600,
+                                        textTransform: 'none',
+                                        '&:hover': {
+                                            bgcolor: 'cardBtn.primary',
+                                        },
+                                    }}
+                                >
+                                    Explore
+                                </Button>
+                            </Link>
+
                         </CardActions>
                     </Card>
                 ))}

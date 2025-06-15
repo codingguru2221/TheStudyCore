@@ -1,0 +1,32 @@
+🎓 TheStudyCore: AI-Powered Educational Platform | Revolutionizing Learning with AI
+
+Transform your learning experience with TheStudyCore, an innovative educational platform that harnesses the power of artificial intelligence to create personalized learning materials and assessments.
+
+✨ Key Features:
+• AI Question Paper Generator - Create customized tests instantly
+• Smart Skill Assessment System - Evaluate your knowledge in real-time
+• AI Syllabus Generator - Get comprehensive course outlines
+• Interactive AI Chat - Get instant help and guidance
+
+🚀 Perfect for:
+• Students preparing for exams
+• Teachers creating study materials
+• Educational institutions
+• Self-learners
+
+💡 Why TheStudyCore?
+• Instant generation of study materials
+• Multiple subject support
+• Real-time AI assistance
+• User-friendly interface
+• Markdown support for better readability
+
+🔧 Built with:
+• React.js
+• Node.js
+• OpenAI Integration
+• MongoDB
+
+Try TheStudyCore today and experience the future of education!
+
+#AIEducation #EdTech #LearningPlatform #ArtificialIntelligence #Education #StudyTools #OnlineLearning #TechEducation #StudentLife #Teachers #EducationalTechnology 

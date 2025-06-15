@@ -53,6 +53,7 @@ const syllabus = [
 
 const CourseDetail = () => {
     return (
+        <>
         <Box
             sx={{
                 p: { md: "3rem 6rem", xs: 2 },
@@ -62,7 +63,7 @@ const CourseDetail = () => {
         >
             {/* Title */}
             <Typography variant="h3" fontWeight="bold" gutterBottom sx={{fontSize:'2rem'}}>
-                🚀 Complete React Developer Course
+                🚀 Complete Developer Course
             </Typography>
 
             {/* Video + Learning */}
@@ -86,7 +87,7 @@ const CourseDetail = () => {
                     }}
                 >
                     <iframe
-                        src="https://www.youtube.com/embed/EHTWMpD6S_0?si=UfH1DWJfUh5NDLXE"
+                        src="https://www.youtube.com/embed/MDZC8VDZnV8"
                         title="React Course"
                         frameBorder="0"
                         allow="autoplay; encrypted-media"
@@ -155,7 +156,7 @@ const CourseDetail = () => {
                             target="_blank"
                             sx={{ textTransform: 'none' }}
                         >
-                            🌐 Visit Official Website
+                            🌐 React Official Website
                         </Button>
 
                         <Button
@@ -169,7 +170,467 @@ const CourseDetail = () => {
                         </Button>
                     </Box>
 
+                    {/* Additional Resource Buttons */}
+                    <Box mt={2} display="flex" gap={2} flexWrap="wrap">
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://www.w3schools.com/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            📚 W3Schools
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://www.geeksforgeeks.org/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            💻 GeeksforGeeks
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://web.dev/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            🌐 Web.dev
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://www.codecademy.com/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            🎓 Codecademy
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://www.udemy.com/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            📖 Udemy
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://www.codewithharry.com/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            👨‍💻 CodeWithHarry
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="https://www.apnacollege.in/"
+                            target="_blank"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            🏫 Apna College
+                        </Button>
+                    </Box>
+
                 </Box>
+            </Box>
+
+            {/* Additional Videos Grid */}
+            <Box sx={{ p: { md: "3rem 6rem", xs: 2 } }}>
+                <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
+                    More Course Videos
+                </Typography>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={4}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/hKB-YGF14SY"
+                                title="React Course Video 2"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/RGKi6LSPDLU"
+                                title="React Course Video 3"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/BsDoLVMnmZs"
+                                title="React Course Video 4"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
+
+            {/* Second Row of Videos */}
+            <Box sx={{ p: { md: "0 6rem", xs: 2 }, mt: 3 }}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/l1EssrLxt7E"
+                                title="React Course Video 5"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/QZfaRHzWM0k"
+                                title="React Course Video 6"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/VlPiVmYuoqw"
+                                title="React Course Video 7"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/hlGoQC332VM"
+                                title="React Course Video 8"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
+
+            {/* Third Row of Videos */}
+            <Box sx={{ p: { md: "0 6rem", xs: 2 }, mt: 3 }}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/XlvsJLer_No"
+                                title="React Course Video 9"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/DbcLg8nRWEg"
+                                title="React Course Video 10"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/k7ELO356Npo"
+                                title="React Course Video 11"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/E6tAtRi82QY"
+                                title="React Course Video 12"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
+
+            {/* Fourth Row of Videos */}
+            <Box sx={{ p: { md: "0 6rem", xs: 2 }, mt: 3 }}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/gY5sGvq-8h8"
+                                title="React Course Video 13"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/ESnrn1kAD4E"
+                                title="React Course Video 14"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/j6Ule7GXaRs"
+                                title="React Course Video 15"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <Box
+                            sx={{
+                                height: "16rem",
+                                width: "100%",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                                boxShadow: 3,
+                            }}
+                        >
+                            <iframe
+                                src="https://www.youtube.com/embed/EceJQ05KTf4"
+                                title="React Course Video 16"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "8px",
+                                }}
+                            ></iframe>
+                        </Box>
+                    </Grid>
+                </Grid>
             </Box>
 
             {/* Syllabus */}
@@ -190,6 +651,8 @@ const CourseDetail = () => {
             </Box>
 
         </Box>
+        
+        </>
     );
 };
 

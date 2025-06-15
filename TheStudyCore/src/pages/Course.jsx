@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Typography, Grid, Container, Button } from "@mui/material";
 import CourseCard from "../components/CourseCard/CourseCard";
 import { Link } from "react-router";
+import VideoSlider from "../components/CourseCard/VideoSlider";
+import CardSlider from "../components/CourseCard/VideoSlider";
 
 const courseList = [
   {
@@ -20,7 +22,22 @@ const courseList = [
     duration: "5 weeks",
   },
   {
-    title: "Data Structures & Algorithms",
+    title: "Data Structures",
+    description: "Crack coding interviews with strong DSA concepts.",
+    duration: "7 weeks",
+  },
+  {
+    title: "Math ",
+    description: "Master Mats from basics to advanced concepts.",
+    duration: "6 weeks",
+  },
+  {
+    title: "Chemistry",
+    description: "Master Mats from basics to advanced concepts.",
+    duration: "5 weeks",
+  },
+  {
+    title: "M-III",
     description: "Crack coding interviews with strong DSA concepts.",
     duration: "7 weeks",
   },
@@ -38,7 +55,7 @@ const Courses = () => {
           textAlign: "center",
         }}
       >
-        <Typography variant="h3" fontWeight="bold">
+        <Typography variant="h3" fontWeight="bold" sx={{fontSize:{xs:'2rem',md:'2.5rem'}}}>
           Explore Our Courses
         </Typography>
         <Typography variant="subtitle1" mt={1}>
@@ -47,10 +64,10 @@ const Courses = () => {
       </Box>
 
       {/* Courses Grid */}
-      <Container sx={{ my: 6 }}>
+      <Box sx={{ my: 6 }}>
         <Grid container spacing={4} justifyContent="center">
           {courseList.map((course, index) => (
-            <Grid item key={index}>
+            <Grid item key={index} >
               <CourseCard
                 title={course.title}
                 description={course.description}
@@ -59,7 +76,8 @@ const Courses = () => {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Box>
+      <CardSlider />
 
       {/* Call to Action */}
       <Box textAlign="center" py={4}>

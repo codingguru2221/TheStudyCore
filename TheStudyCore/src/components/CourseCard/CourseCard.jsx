@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography, Button, Box } from "@mui/material";
+import { Link } from "react-router";
 
 const CourseCard = ({ title, description, duration }) => {
   return (
@@ -24,9 +25,11 @@ const CourseCard = ({ title, description, duration }) => {
           Duration: {duration}
         </Typography>
         <Box mt={2}>
-          <Button variant="contained" size="small">
-            Enroll Now
-          </Button>
+          <Link to={'/courseDetail'}>
+            <Button variant="contained" size="small" sx={{ textTransform: 'none' }}>
+              View more
+            </Button>
+          </Link>
         </Box>
       </CardContent>
     </Card>

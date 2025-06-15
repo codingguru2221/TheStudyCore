@@ -13,6 +13,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
 import AiModal from './modals/AiModal';
 
+import ailogo from '../src/assets/ailogo3.png'
+import CourseDetail from './components/CourseCard/CourseDetail';
+
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -92,12 +95,12 @@ function App({ toggleMode, mode }) {
                   padding: { md: '2rem 6rem', xs: 0, sm: 0 },
                 }}
               >
-                <MenuAppBar toggleMode={toggleMode} mode={mode} isHome={true} />
+                <MenuAppBar toggleMode={toggleMode} mode={mode} isHome={true} setIsLoggedIn={setIsLoggedIn} />
                 <HomeFirstSection />
               </Box>
             ) : (
               <Box sx={{ padding: { md: '2rem 6rem', xs: 0, sm: 0 } }}>
-                <MenuAppBar toggleMode={toggleMode} mode={mode} isHome={false} />
+                <MenuAppBar toggleMode={toggleMode} mode={mode} isHome={false} setIsLoggedIn={setIsLoggedIn} />
               </Box>
             )
           )}
@@ -167,6 +170,11 @@ function App({ toggleMode, mode }) {
                 <ContactPage />
               </PrivateRoute>}
             />
+            <Route path="/courseDetail" element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <CourseDetail />
+              </PrivateRoute>}
+            />
           </Routes>
 
           {/* Footer only if not on login/register */}
@@ -177,13 +185,17 @@ function App({ toggleMode, mode }) {
           }
         </Suspense>
       </Box>
-      <Box sx={{ position: "fixed", right: '10px', bottom: '10px' }}>
-        <Box onClick={handleModal} sx={{ cursor: 'pointer', position: 'relative', width: '40px', height: '40px', borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'red', color: 'imgBtn.primary' }}>
-          Ai
-        </Box>
-      </Box>
+      {!isLoginPage && (
+        <Box sx={{ position: "fixed", right: '10px', bottom: '10px' }}>
+          <Box onClick={handleModal} sx={{ cursor: 'pointer', position: 'relative', width: '4rem', height: '4rem', borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#06112F', color: 'white' }}>
+            <img src={ailogo} alt="" style={{ width: '100%', height: '100%' }} />
+          </Box>
+        </Box>)}
 
-      {openModal ? <AiModal open={openModal} onClose={handleClose} /> : ""}
+
+      {openModal && (
+        <AiModal open={openModal} onClose={handleClose} />
+      )}
     </RouteChangeHandler>
   );
 }

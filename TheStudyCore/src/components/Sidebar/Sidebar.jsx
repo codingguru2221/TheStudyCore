@@ -23,7 +23,7 @@ import PersonIcon from '@mui/icons-material/Person';
 
 
 
-export default function Sidebar({ open, onClose, navitem }) {
+export default function Sidebar({ open, onClose, navitem, setIsLoggedIn }) {
     const navigate = useNavigate();
 
     const sidebaritem = [{ lable: 'Dashboard', path: '/dashboard', icon: DashboardIcon },
@@ -93,6 +93,7 @@ export default function Sidebar({ open, onClose, navitem }) {
                     onClick={() => {
                         localStorage.removeItem("user");
                         window.location.replace("/login");
+                        localStorage.setItem("isLoggedIn", "false");
                         setIsLoggedIn(false);
                         toast.info("You have been logged out.");
                     }}

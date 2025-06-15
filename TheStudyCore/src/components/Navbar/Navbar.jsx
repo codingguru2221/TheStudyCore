@@ -21,7 +21,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 
-export default function MenuAppBar({ toggleMode, mode, isHome }) {
+export default function MenuAppBar({ toggleMode, mode, isHome,setIsLoggedIn }) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openSidebar, setOpenSidebar] = React.useState(false)
@@ -51,7 +51,7 @@ export default function MenuAppBar({ toggleMode, mode, isHome }) {
     { lable: "Courses", path: "/course", icon: LibraryBooksIcon },
   ]
   return (
-    <Box sx={{ flexGrow: { md: 1, xs: 0, sm: 1 }, mb: { md: 5, xs: 10 } }}>
+    <Box sx={{ flexGrow: { md: 1, xs: 0, sm: 1 }, mb: { md: 5, xs: 4 } }}>
       <AppBar position="static" sx={{ backgroundColor: isHome ? 'transparent' : '#3241B8', color: 'navbarColor.primary', boxShadow: 'none', }}>
         <Toolbar sx={{ color: 'navbarColor.primary', p: 1 }}>
           <IconButton
@@ -65,7 +65,7 @@ export default function MenuAppBar({ toggleMode, mode, isHome }) {
             <MenuIcon />
           </IconButton>
 
-          {openSidebar ? <Sidebar navitem={navitem} open={openSidebar} onClose={handleSidebarClose} /> : ""}
+          {openSidebar ? <Sidebar navitem={navitem} open={openSidebar} onClose={handleSidebarClose} setIsLoggedIn={setIsLoggedIn}/> : ""}
           <Box variant="h6" component="div" sx={{ flexGrow: 1, color: 'navbarColor.primary' }}>
             <Link to="/" style={{ textDecoration: 'none' }}>
               <Typography sx={{ flexGrow: 1, color: 'navbarColor.primary', fontSize: '1.2rem', fontWeight: 600 }}>

@@ -18,7 +18,7 @@ const ProfilePage = () => {
       sx={{
         display: 'flex',
         bgcolor: 'background.default',
-        minHeight: '100vh',
+        minHeight:{md: '90vh',xs:'80vh'},
         p: { md: '3rem 6rem', xs: '1rem' },
       }}
     >

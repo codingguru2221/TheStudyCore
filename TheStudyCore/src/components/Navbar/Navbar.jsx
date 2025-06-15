@@ -19,9 +19,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import CustomButton from '../BtnPages/CustomButton';
 
 
-export default function MenuAppBar({ toggleMode, mode, isHome,setIsLoggedIn }) {
+export default function MenuAppBar({ toggleMode, mode, isHome, setIsLoggedIn }) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openSidebar, setOpenSidebar] = React.useState(false)
@@ -65,7 +66,7 @@ export default function MenuAppBar({ toggleMode, mode, isHome,setIsLoggedIn }) {
             <MenuIcon />
           </IconButton>
 
-          {openSidebar ? <Sidebar navitem={navitem} open={openSidebar} onClose={handleSidebarClose} setIsLoggedIn={setIsLoggedIn}/> : ""}
+          {openSidebar ? <Sidebar navitem={navitem} open={openSidebar} onClose={handleSidebarClose} setIsLoggedIn={setIsLoggedIn} /> : ""}
           <Box variant="h6" component="div" sx={{ flexGrow: 1, color: 'navbarColor.primary' }}>
             <Link to="/" style={{ textDecoration: 'none' }}>
               <Typography sx={{ flexGrow: 1, color: 'navbarColor.primary', fontSize: '1.2rem', fontWeight: 600 }}>
@@ -84,8 +85,14 @@ export default function MenuAppBar({ toggleMode, mode, isHome,setIsLoggedIn }) {
             <Link to={'/contact'} style={{ textDecoration: 'none' }}>
               <Typography sx={{ cursor: 'pointer', fontWeight: 600, color: 'navbarColor.primary' }}>Contact</Typography>
             </Link>
+
           </Box>
 
+          <Box>
+            <Link to={'/detailbtnpage'} style={{ textDecoration: "none" }}>
+              <CustomButton />
+            </Link>
+          </Box>
 
           {auth && (
             <div>

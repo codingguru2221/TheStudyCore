@@ -15,6 +15,7 @@ import AiModal from './modals/AiModal';
 
 import ailogo from '../src/assets/ailogo3.png'
 import CourseDetail from './components/CourseCard/CourseDetail';
+import DetailBtnPage from './components/BtnPages/DetailPage';
 
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -173,6 +174,11 @@ function App({ toggleMode, mode }) {
             <Route path="/courseDetail" element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <CourseDetail />
+              </PrivateRoute>}
+            />
+            <Route path="/detailbtnpage" element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <DetailBtnPage />
               </PrivateRoute>}
             />
           </Routes>

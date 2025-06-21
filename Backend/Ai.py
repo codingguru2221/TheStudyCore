@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure Gemini
-API_KEY = "AIzaSyDMJPxYhVOvZFwvYQ0UEvx9IEJyULgYyrU"
+API_KEY = "AIzaSyDaVnNZxcBDVuiu7C17UQMQ5U772_9WsMg"
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("models/gemini-1.5-flash")
 
